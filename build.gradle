@@ -1,17 +1,46 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.9.9")
+    }
 }
 
-group 'org.udea.calidad'
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
-
+ext {
+    serenityVersion = '1.9.9'
+    serenityCucumberVersion = '1.9.8'
+    serenityScreenPlayRestVersion = '1.9.17'
+}
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityScreenPlayRestVersion"
+
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.assertj:assertj-core:3.9.1"
+    testImplementation "org.slf4j:slf4j-simple:1.7.21"
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 test {
